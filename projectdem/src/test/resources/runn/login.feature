@@ -4,7 +4,7 @@ Feature: Personal Information
   Scenario: Personal Information
     Given user has to launch the application admission page
     When user has to fill the pson information in form of textbox fields
-    |venkateshwaran |
+    |venka|
     |mu|
     |Thangamani Nagar|
     |chennai|
