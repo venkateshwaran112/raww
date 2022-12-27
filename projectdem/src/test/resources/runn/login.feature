@@ -6,10 +6,10 @@ Feature: Personal Information
     When user has to fill the pson information in form of textbox fields
     |venka|
     |mu|
-    |Thangamani Nagar|
+    |Thangaman|
     |chennai|
     |Silicon Valley|
-    |New York|
+    |New|
     |100345|
     |7847839842|
     |8465732456|
