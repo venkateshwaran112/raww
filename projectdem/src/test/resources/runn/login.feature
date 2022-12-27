@@ -5,7 +5,7 @@ Feature: Personal Information
     Given user has to launch the application admission page
     When user has to fill the pson information in form of textbox fields
     |venkateshwaran |
-    |murugesan |
+    |mu|
     |Thangamani Nagar|
     |chennai|
     |Silicon Valley|
