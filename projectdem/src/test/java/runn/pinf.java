@@ -17,6 +17,8 @@ import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -27,6 +29,7 @@ import com.runner.Runnerc;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.Status;
@@ -43,22 +46,30 @@ public class pinf extends Baseclass  {
   
   
   
-	 @Before
-	 public void beforeHooks(Scenario s) {
-		 String Nmae = s.getName();
-		 System.out.println("Scenario Name :"+ Nmae);
-	
-	}
-	
-	 @After
-	 public void afterHooks(Scenario s) {
-		 Status statusOfScenario = s.getStatus();
-		 System.out.println("statusOfScenario :"+ statusOfScenario);
-		 
-//		 if (s.isFailed()) {
-//			 screenShot("F:\\musheik2\\Sneha Projects\\Maven\\Adcitin_And_Cucumber\\Screenshots\\failed.png");
-//			
-		}
+//	 @Before
+//	 public void beforeHooks(Scenario s) {
+//		 String Nmae = s.getName();
+//		 System.out.println("Scenario Name :"+ Nmae);
+//	
+//	}
+//	
+//	 @After
+//	 public void afterHooks(Scenario s) {
+//		 Status statusOfScenario = s.getStatus();
+//		 System.out.println("statusOfScenario :"+ statusOfScenario);
+//		 
+////		 if (s.isFailed()) {
+////			 screenShot("F:\\musheik2\\Sneha Projects\\Maven\\Adcitin_And_Cucumber\\Screenshots\\failed.png");
+////			
+//		}
+//	 @AfterStep
+//	 public void attachscreenshot(Scenario sce) {
+//		 if(sce.isFailed()) {
+//		 byte[] scre = ((TakesScreenshot)Runnerc.driver).getScreenshotAs(OutputType.BYTES);
+//		 sce.attach(scre, "image/png", "erorscreen");
+//		 
+//		 }
+//	 }
 	
 	@Given("user has to launch the application admission page")
 	public void user_has_to_launch_the_application_admission_page() throws InterruptedException {
@@ -70,13 +81,14 @@ public class pinf extends Baseclass  {
 
 	@When("user has to fill the pson information in form of textbox fields")
 	public void user_has_to_fill_the_pson_information_in_form_of_textbox_fields(DataTable dataTable) throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		LOGGER.info("User personal information entry has started");
 		List<String> asl = dataTable.asList(String.class);
 //		System.out.println(asl.size());
 //		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-	    waitforElementVisiblity(pg.getWp1().getFirstname());
+	    pg.getWp1().getFirstname().sendKeys(asl.get(0));
 		Actions ac = new Actions(driver);
-		ac.click(pg.getWp1().getFirstname()).sendKeys(asl.get(0) +Keys.TAB).sendKeys(Keys.TAB)
+		ac.sendKeys(pg.getWp1().getFirstname(), asl.get(0)).sendKeys(Keys.TAB).sendKeys(Keys.TAB)
 		.sendKeys(asl.get(1) +Keys.TAB).sendKeys(asl.get(2)+Keys.TAB).sendKeys(asl.get(3)+Keys.TAB+Keys.TAB)
 		.sendKeys(asl.get(4)+Keys.TAB).sendKeys(asl.get(5)+Keys.TAB).sendKeys(asl.get(6)+Keys.TAB)
 		.sendKeys(asl.get(7)+Keys.TAB).sendKeys(asl.get(8)+Keys.TAB+Keys.TAB).sendKeys(asl.get(9)).perform();
@@ -106,6 +118,9 @@ public class pinf extends Baseclass  {
 	   String te = driver.findElement(By.xpath("//span[@class='fusion-alert-content']")).getText();
 	  if( te.contains("THANK YOU")) {
 		  System.out.println("Submit is successful");
+	  }
+	  else {
+		  Assert.fail("Fill up the mandatory fields");
 	  }
 	}
 

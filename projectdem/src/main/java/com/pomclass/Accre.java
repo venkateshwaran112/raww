@@ -87,10 +87,31 @@ public class Accre {
 	@FindBy(xpath="(//button[@tabindex='-1'])[1]")
 	private WebElement logbuton;
 	
-	@FindBy(xpath="(//div[@class='customer-menu']//li[@class='authorization-link'])[1]")
-	private WebElement signout;                 
+//	@FindBy(xpath="(//div[@class='customer-menu']//li[@class='authorization-link'])[1]")
+//	private WebElement signout; 
+	
+	@FindBy(xpath="(//div[@class='customer-menu']//li//a)[3]")
+	private WebElement sigout;
 
-	public WebElement getButon() {
+	public WebElement getSigout() {
+		return sigout;
+	}
+
+
+
+	public WebElement getLogbuton() {
+		return logbuton;
+	}
+
+
+
+//	public WebElement getSignout() {
+//		return signout;
+//	}
+
+
+
+	public WebElement getlogButon() {
 		return logbuton;
 	}
 

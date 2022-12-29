@@ -15,9 +15,10 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources/runn", glue="runn", tags="@acc or @per",
+@CucumberOptions(features="src/test/resources/runn", glue={"runn","Hooooks"}, tags=("@acc or @per"),
 monochrome=true,
-plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"})
+plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+		"rerun:target/failscenario.txt"})
 
 public class Runnerc extends Baseclass {
 	public static Properties prop;
