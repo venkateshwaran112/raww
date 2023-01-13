@@ -1,5 +1,6 @@
 package com.baseclass;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,10 +19,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Baseclass {
 
 	public static Properties prop;
 	public static WebDriver driver;
+	public static ExtentHtmlReporter htmlReporter;
+	public static ExtentReports extent;
+	public static ExtentTest test;
+	public static ExtentTest childTest;
+
 
 
 	public static WebDriver getBrowser(String browserName) throws Exception {
@@ -40,11 +53,11 @@ public class Baseclass {
 
 		try {
 			if (browserName.equalsIgnoreCase("chrome")) {
-			
+//			   WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver(opt);
 
 			} else if (browserName.equalsIgnoreCase("firefox")) {
-				
+//				WebDriverManager.firefoxdriver().setup();
 				driver = new FirefoxDriver();
 
 			}
@@ -85,19 +98,19 @@ public class Baseclass {
 	}
 
 	// Setup extend report v4
-//	public static void setExtentReport() {
-//
-//		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "./Report/MMTReport.html");
-//		htmlReporter.config().setDocumentTitle("Makemytrip Automation Report");
-//		htmlReporter.config().setReportName("Functional Testing");
-//		htmlReporter.config().setTheme(Theme.DARK);
-//
-//		extent = new ExtentReports();
-//		extent.attachReporter(htmlReporter);
-//		extent.setSystemInfo("Host name", "localhost");
-//		extent.setSystemInfo("Environemnt", "QA");
-//		extent.setSystemInfo("user", "QA");
-//	}
+	public static void setExtentReport() {
+	
+		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "./Reportt/Demport.html");
+		htmlReporter.config().setDocumentTitle("Automation Report");
+		htmlReporter.config().setReportName("Functional Testing");
+		htmlReporter.config().setTheme(Theme.DARK);
+
+		extent = new ExtentReports();
+		extent.attachReporter(htmlReporter);
+		extent.setSystemInfo("Host name", "localhost");
+		extent.setSystemInfo("Environemnt", "QA");
+		extent.setSystemInfo("user", "QA");
+	}
 
 	public static void getUrl() {
 		try {

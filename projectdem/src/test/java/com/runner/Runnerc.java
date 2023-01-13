@@ -17,8 +17,11 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(features="src/test/resources/runn", glue={"runn","Hooooks"}, tags=("@acc or @per"),
 monochrome=true,
-plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-		"rerun:target/failscenario.txt"})
+plugin = {"rerun:target/failscenario.txt","json:target/cucumber.json"
+		})
+//"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+//"json:target/cucumber.json"
+//"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
 
 public class Runnerc extends Baseclass {
 	public static Properties prop;
@@ -32,15 +35,17 @@ public class Runnerc extends Baseclass {
 //	
 	@BeforeClass
 	public static void setUp() throws Throwable {
+		
 		prop=readPropertyFile();
 		String browser = prop.getProperty("browser");
 		driver = Baseclass.getBrowser(browser);
+		setExtentReport();
 	}
 
 	@AfterClass
 	public static void report() {
-//		extent.flush();
-//		driver.quit();
+		extent.flush();
+		driver.quit();
 	}
 
 }

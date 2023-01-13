@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.baseclass.Baseclass;
 import com.pomclass.Pageobj;
 import com.runner.Runnerc;
@@ -73,7 +74,8 @@ public class pinf extends Baseclass  {
 	
 	@Given("user has to launch the application admission page")
 	public void user_has_to_launch_the_application_admission_page() throws InterruptedException {
-		
+		 test = extent.createTest("Registration for Demo site");
+			test.assignCategory("Regression Test");
 		LOGGER.info("URL has started");
 		getUrl();
 	
@@ -112,7 +114,6 @@ public class pinf extends Baseclass  {
 //
 	@Then("click the submit button")
 	public void click_the_submit_button() {
-	    
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		pg.getWp1().getButton().click();
 	   String te = driver.findElement(By.xpath("//span[@class='fusion-alert-content']")).getText();
@@ -120,7 +121,11 @@ public class pinf extends Baseclass  {
 		  System.out.println("Submit is successful");
 	  }
 	  else {
+		  test.fail("Please fill the mandatory fields");
 		  Assert.fail("Fill up the mandatory fields");
+		 
+
+		 
 	  }
 	}
 

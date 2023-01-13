@@ -11,9 +11,11 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.baseclass.Baseclass;
 import com.pomclass.Pageobj;
 import com.runner.Runnerc;
+
 
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
@@ -27,9 +29,12 @@ import io.cucumber.java.en.When;
 public class Accountcreation extends Baseclass{
 	
 	  public static WebDriver driver = Runnerc.driver;
+	 
 	  public static java.util.Properties pro = Runnerc.prop;
 	  Pageobj pg = new Pageobj(driver);
 	  private static final Logger LOGGER = LogManager.getLogger(Accountcreation.class);
+	  
+	 
 	  
 	  
 //		 @Before
@@ -59,6 +64,8 @@ public class Accountcreation extends Baseclass{
 		 @Given("User enter the url click create and account page")
 		 public void user_enter_the_url_click_create_and_account_page() {
 			 
+		    test = extent.createTest("Registration for Demo site");
+			test.assignCategory("Regression Test");
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 			getaccUrl(); 
 			pg.getwp2().getCre().click();
@@ -87,10 +94,11 @@ public class Accountcreation extends Baseclass{
 	        String ati = pg.getwp2().getErrpass().getAttribute("style");
 	        if(ati.contains("display: none;")) {
 	        	Assert.assertTrue(true);
+	        	test.log(com.aventstack.extentreports.Status.INFO, "Password Standards matched");
 	        	System.out.println("Result is pass");
 	        }else {
-	        	
-	        	Assert.fail("Result is fail");
+	        	test.fail("Passwords standards does not matched");
+	            Assert.fail("Result is fail");
 	        }
 	        pg.getwp2().getButton().click();
 	        Thread.sleep(2000);
@@ -98,10 +106,14 @@ public class Accountcreation extends Baseclass{
 	        String ti = driver.getCurrentUrl();
 			 if(ti.contains("https://magento.softwaretestingboard.com/customer/account/")) {
 				 Assert.assertTrue(true);
+				 test.log(com.aventstack.extentreports.Status.INFO, "New Login credentials is created");
 			 }
 			 else {
-               Assert.fail();
-			 }}
+				  Assert.fail();
+				  test.fail("User have a login already");
+				  
+				 
+             			 }}
 	        catch (Exception e) {
 	        	  String ti = driver.getCurrentUrl();
 	        	  Assert.fail();
