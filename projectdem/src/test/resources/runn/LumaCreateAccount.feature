@@ -9,8 +9,8 @@ Scenario Outline: Account creation
 
     Examples: 
       | Firstname   | Lastname | E_mail                | pwd         | cnfrm_pwd   |
-      |  iewani     | raani    |oihuxroeniraani@gmail.com |Vaaniraani@gm|Vaaniraani@gm|
-      |  ewiojisu   | dhunivu  |lkiypdprthunivu@gmail.com|Varthunivu|Varthunivu|
+      |  iewani     | raani    |oirubvdodxniaaaii@gmail.com |Vaaniraani@gm|Vaaniraani@gm|
+      |  ewiojisu   | dhunivu  |lkipodpgthunsvu@gmail.com|Varthunivu|Varthunivu|
       #|  kjwefhiva  | dr       |iwerelivadr@gmail.com  |sivadr       |sivadr       |
       #|  sethu      | junga    |iwerfthujunga@gmail.com|Sethujunga@gm|Sethujunga@gm|
       
